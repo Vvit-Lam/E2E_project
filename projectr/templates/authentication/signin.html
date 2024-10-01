@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 125vh;
+    }
+
+    .background-image {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      max-width: 200px;
+      width: 100%;
+      padding: 22px;
+      font-family: cursive;
+      border: 2px solid #E2A9A9;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #FFFFFF;
+    
+    }
+
+        .login {
+            padding: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjusted background color */
+            border-radius: 5px;
+            box-shadow: 1px 1px 10px cyan; /* Reduced box-shadow intensity */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+            margin: auto; /* Center the form on the page */
+            margin-top: 50px; /* Add some top margin */
+        }
+
+        .login header {
+            margin-bottom: 15px; /* Adjusted margin for header */
+        }
+
+        img {
+            width: 80px;
+            border-radius: 50%;
+            box-shadow: 1px 1px 10px cyan; /* Reduced box-shadow intensity */
+        }
+
+        .field {
+            border: 1px solid black;
+            border-radius: 50px;
+            background-color: transparent;
+            width: 100%;
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .field span {
+            color: white;
+            width: 40px;
+            line-height: 45px;
+            text-align: center;
+        }
+
+        .field input {
+            width: 100%;
+            height: 45px;
+            font-size: 1.1rem;
+            padding: 5px;
+            color: cyan;
+            background-color: transparent;
+            border: none;
+        }
+
+        .user-type {
+            margin-bottom: 15px;
+        }
+
+        .user-type label {
+            margin-right: 15px;
+            color: white;
+        }
+
+        .user-type input {
+            margin-right: 5px;
+        }
+
+        .submit {
+            width: 100%;
+            height: 35px;
+            margin-top: 9px;
+            margin-bottom: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 25px; /* Adjusted border-radius */
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background-color: orangered;
+        }
+
+        .forgot-password {
+            width: 100%;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .forgot-password a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add styles for the "Not Authenticated" message */
+        p {
+            text-align: center;
+            color: white;
+        }
+
+        /* Move these styles together */
+        input:focus, input:hover, input:active {
+            outline: none;
+        }
+
+        .field input::placeholder {
+            color: #ccc; /* Adjust the color to make it more visible */
+        }
+
+        .field input:focus::placeholder,
+        .field input:hover::placeholder,
+        .field input:active::placeholder {
+            color: #aaa; /* Adjust the color when the input is focused or hovered */
+        }
+
+
+
+    /* Rest of the CSS styles... */
+  </style>
+</head>
+<body class="background-image">
+  <div >
+    <body>
+    
+        <form method="post" action="signin" class="login">
+            <header><img src="https://upload.wikimedia.org/wikipedia/commons/1/18/A_View_of_Central_Block_of_VVIT.jpg" alt="VVIT Building"></header>
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            
+                <button type="submit" class="submit">Login</button>
+            
+            <a href="{% url 'signup' %}" class="submit create-account" style="text-decoration: none; display: block; text-align: center; padding: 7px 2px; ">CREATE ACCOUNT</a>
+    
+            <div class="forgot-password"><a href="/forgetpass">Forgot password?</a></div>
+           
+          </script>
+          
+                {% if messages %}
+                    <div class="form-group">
+                        {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <script defer>
+                        // JavaScript to hide error messages after 5 seconds
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var alertMessages = document.querySelectorAll('.alert-danger');
+                            alertMessages.forEach(function(message) {
+                                setTimeout(function() {
+                                    message.style.display = 'none';
+                                }, 1000); // Set the time in milliseconds (5 seconds in this example)
+                            });
+                        });
+                    </script>
+                {% endif %}
+           
+        </form>
+    
+    <!-- Your registration form HTML goes here -->
+  </div>
+
+  <script>
+    const backgroundImages = [
+      'url(https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1975&q=80)',
+    ];
+
+    let currentImageIndex = 0;
+
+    function changeBackgroundImage() {
+      document.body.style.backgroundImage = backgroundImages[currentImageIndex];
+      currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+    }
+
+    setInterval(changeBackgroundImage, 1000); // Change background image every 250 milliseconds
+  </script>
+</body>
+</html>

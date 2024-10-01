@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Form</title>
+    <style>
+        h1 {
+            color: green;
+            text-decoration: yellow;
+        }
+        form {
+            width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group input[type="submit"] {
+            background-color: green;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Student Form</h1>
+        <hr/>
+        <form id="form1" autocomplete="off" method="post" >
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="student_name">Student Name:</label>
+                <input type="text" id="student_name" name="studentName" autofocus required />
+            </div>
+            <div class="form-group">
+                <label for="date_of_birth">Date of Birth:</label>
+                <input type="date" id="date_of_birth" name="DOB" required />
+            </div>
+            <div class="form-group">
+                <label for="mobile_number">Mobile Number:</label>
+                <input type="text" id="mobile_number" name="mobileumber" pattern="[0-9]{10}" title="Please enter a 10-digit mobile number" required />
+            </div>
+            <div class="form-group">
+                <label for="mobile_number">parentMobile Number:</label>
+                <input type="text" id="parentmobileumber" name="parentmobileumber" pattern="[0-9]{10}" title="Please enter a 10-digit mobile number" required />
+            </div>
+            <div class="form-group">
+                <label for="email_id">Email ID:</label>
+                <input type="email" id="email_id" name="emailid"/>
+            </div>
+            <div class="form-group">
+                <label for="student_address">Address:</label>
+                <input type="text" id="student_address" name="studentaddress" pattern="[a-zA-Z0-9\s\.,-]+" required />
+            </div>
+            <div class="form-group">
+                <label for="join_date">Join Date:</label>
+                <input type="date" id="join_date" name="joindate" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register"/>
+            </div>
+        </form>
+    </center>
+</body>
+</html>

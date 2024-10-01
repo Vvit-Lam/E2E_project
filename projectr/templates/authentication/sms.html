@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ERP SMS Alerts & Notifications</title>
+  <style>
+    /* CSS styles */
+   body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh; /* Decreased height */
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e0f2f1;
+      background-size: cover;
+    }
+
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    main {
+      text-align: center;
+    }
+
+    .form-container {
+      display: inline-block;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label,
+    input,
+    button,
+    select {
+      margin: 8px 0;
+      border-radius: 20px; /* Circular shape */
+      padding: 10px; /* Increased padding */
+      border: 1px solid #ccc; /* Border for the inputs */
+      width: 250px; /* Decreased width */
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    select {
+      width: 254px; /* Adjusted to match other inputs with the border width */
+    }
+
+    .drag-drop-container {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="form-container">
+      <section class="notification-form">
+        <h2>Alert Notification Form</h2>
+        <form method="post" action="{% url 'send_alert_email' %}">
+          {% csrf_token %}
+          
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+          <br>
+          <button type="submit">Send Alert</button>
+        </form>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

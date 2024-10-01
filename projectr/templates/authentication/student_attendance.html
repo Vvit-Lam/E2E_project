@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F28D69;
+            margin: 0;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 30%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px 10px 10px 10px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .f-group label {
+            display: inline-block;
+            margin-bottom: 8px;
+            font-family: 'Roboto';
+            font-weight: 500;
+        }
+
+        label, select {
+            display: inline-block;
+            width: 100px;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        select, button {
+            width: 100px;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            margin: 20px 20px 20px 20px;
+            cursor: pointer;
+            place-items: center;
+        }
+
+        h1 {
+            color: black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Attendance Management</h1>
+        <div class="f-group">
+            <label for="slct1">Year</label>
+            <select name="slct1" id="slct1" onchange="populateDepartments()">
+                <option value="">--choose Year--</option>
+            </select>
+        </div>
+        <div class="f-group">
+            <label for="slct2">Department</label>
+            <select name="slct2" id="slct2" onchange="populateSections()" >
+                <option value="">--choose Department--</option>
+            </select>
+        </div>
+        <div class="f-group">
+            <label for="slct3">Section</label>
+            <select name="slct3" id="slct3" onchange="populateSubjects()">
+                <option value="">--choose Section--</option>
+            </select>
+        </div>
+        <div class="f-group">
+            <label for="slct4">Subject</label>
+            <select name="slct4" id="slct4">
+                <option value="">--choose Subject--</option>
+            </select>
+        </div> 
+        <div>
+            <!-- Link to the form -->
+            <!-- <a href="{% url 'attendance_entry' %}" id="attendanceEntryLink">Enter Attendance</a> -->
+        </div>
+        <div>
+            <button id="UpdateButton" data-url="{% url 'attendance_updation' %}" onclick="updateData()">Update</button>
+            <button id="AttendanceEntry" onclick="enterData()">Enter</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+       $(document).ready(function() {
+    // Call the function to populate years when the page loads
+    populateYears();
+});
+
+function populateYears() {
+    var url = '/get_years/';
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(data) {
+            var slct1 = $('#slct1');
+            slct1.empty().append('<option value="">--choose Year--</option>');
+            $.each(data, function(index, year) {
+                slct1.append('<option value="' + year.id + '">' + year.name + '</option>');
+            });
+            slct1.trigger('change');
+        },
+        error: function(error) {
+            console.error('Error fetching years:', error);
+        }
+    });
+}
+
+function populateDepartments() {
+    var url = '/get_departments/';
+    var yearId = $('#slct1').val();
+    if (!yearId) {
+        $('#slct2').empty().append('<option value="">--choose Department--</option>');
+        $('#slct3').empty().append('<option value="">--choose Section--</option>');
+        $('#slct4').empty().append('<option value="">--choose Subject--</option>');
+        return;
+    }
+    var url = `/get_departments/?year_id=${yearId}`;
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(data) {
+            var slct2 = $('#slct2');
+            slct2.empty().append('<option value="">--choose Department--</option>');
+            $.each(data, function(index, department) {
+                slct2.append('<option value="' + department.id + '">' + department.name + '</option>');
+            });
+            slct2.trigger('change');
+        },
+        error: function(error) {
+            console.error('Error fetching departments:', error);
+        }
+    });
+}
+
+function populateSections() {
+    var departmentId = $('#slct2').val();
+    var yearId = $('#slct1').val();
+    if (!departmentId || !yearId) {
+        $('#slct3').empty().append('<option value="">--choose Section--</option>');
+        $('#slct4').empty().append('<option value="">--choose Subject--</option>');
+        return;
+    }
+    var url = `/get_sections/?department_id=${departmentId}`;
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(data) {
+            var slct3 = $('#slct3');
+            slct3.empty().append('<option value="">--choose Section--</option>');
+            $.each(data, function(index, section) {
+                slct3.append('<option value="' + section.id + '">' + section.name + '</option>');
+            });
+            slct3.trigger('change');
+        },
+        error: function(error) {
+            console.error('Error fetching sections:', error);
+        }
+    });
+}
+
+function populateSubjects() {
+    var departmentId = $('#slct2').val();
+    var yearId = $('#slct1').val();
+    if (!departmentId || !yearId) {
+        $('#slct4').empty().append('<option value="">--choose Subject--</option>');
+        return;
+    }
+    var url = `/get_subjects/?year_id=${yearId}&department_id=${departmentId}`;
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(data) {
+            var slct4 = $('#slct4');
+            slct4.empty().append('<option value="">--choose Subject--</option>');
+            $.each(data, function(index, subject) {
+                slct4.append('<option value="' + subject.id + '">' + subject.name + '</option>');
+            });
+        },
+        error: function(error) {
+            console.error('Error fetching subjects:', error);
+        }
+    });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+ <title>Knowmore</title>
+
+    <!-- Link Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+        /* CSS styles */
+        body {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="m-auto " style="background-color:#EFEFEF;padding-left:12px;background-size:cover;">
+        
+         <div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-3 col-md-6">
+            <div class="p-2 bg-light shadow m-3" style="border-radius:12px;">
+                <img src="https://twizel.ibcdn.nz/media/2022_03_01_attendance.png" style="width:100%;">
+                <h1 id="attendanceLink" style="font-size:24px;padding:8px; cursor: pointer;">Faculty Attendance</h1>
+            </div>
+        </div>
+                    <div class="col-12 col-lg-3 col-md-6">
+                    <div class="p-2 bg-light shadow m-3" style="border-radius:12px;">
+                        <img src="https://twizel.ibcdn.nz/media/2022_03_01_attendance.png" style="width:100%;">
+                        <h1  id="smsalert" style="font-size:24px;padding:8px; cursor: pointer;">Sms Alter & notification</h1>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-6">
+                    <div class="p-2 bg-light shadow m-3" style="border-radius:12px;">
+                        <img src="https://twizel.ibcdn.nz/media/2022_03_01_attendance.png" style="width:100%;">
+                        <h1  id="timetableadjustment" style="font-size:24px;padding:8px; cursor: pointer;">TIME-TABLE-ADJUSTMENT</h1>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-6">
+                    <div class="p-2 bg-light shadow m-3" style="border-radius:12px;">
+                        <img src="https://twizel.ibcdn.nz/media/2022_03_01_attendance.png" style="width:100%;">
+                        <h1  id="condonationLink" style="font-size:24px;padding:8px; cursor: pointer;">Condonation & detention list</h1>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-3 col-md-6">
+                    <div class="p-2 bg-light shadow m-3" style="border-radius:12px;">
+                        <img src="https://twizel.ibcdn.nz/media/2022_03_01_attendance.png" style="width:100%;">
+                        <h1  id="leave-form" style="font-size:24px;padding:8px; cursor: pointer;">Faculty Leave Adjustment</h1>
+                    </div>
+                </div>
+                </div>
+                
+       
+
+             
+                </div>
+       
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-static-website/js/ccbp-ui-kit.js"></script>
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('attendanceLink').onclick = function() {
+                window.location.href = '{% url "attendance_entry" %}';
+            };
+        });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('smsalert').onclick = function() {
+                window.location.href = '{% url "send_alert_email" %}';
+            };
+        });
+
+document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('timetableadjustment').onclick = function() {
+                window.location.href ='{% url "timetable" %}';
+            };
+        });
+document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('leave-form').onclick = function() {
+                window.location.href ='{% url "faculty-leave" %}';
+            };
+        });
+document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('student-attendance').onclick = function() {
+                window.location.href = '';
+            };
+        });
+document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('condonationLink').onclick = function() {
+                window.location.href = 'file:///C:/Users/Balaram%20Krishna/AppData/Local/Microsoft/Windows/INetCache/IE/QZ03EPJ8/_on[1].html';
+            };
+        });
+
+</script>
+
+</body>
+</html>

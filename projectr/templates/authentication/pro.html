@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+        .profile-details {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            background-color: #f9f9f9;
+        }
+        .profile-details img {
+            max-width: 100px;
+            max-height: 100px;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        .profile-details p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-details">
+        <!-- Logo -->
+        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQsQh8tvclNkrB57vus8zpRAo72kuSDkBOXQ&usqp=CAU'  alt="Logo">
+        <h1>Profile Details</h1>
+        {% if student %}
+            <form method="post">
+                {% csrf_token %}
+                <p><strong>Student Name:</strong> <input type="text" name="student_name" value="{{ student.student_name }}"></p>
+                <p><strong>Date of Birth:</strong> {{ student.date_of_birth }}</p>
+                <p><strong>Mobile Number:</strong> {{ student.mobile_number }}</p>
+                <p><strong>Email ID:</strong> <input type="email" name="email_id" value="{{ student.email_id }}"></p>
+                <p><strong>Student Address:</strong> {{ student.student_address }}</p>
+                <p><strong>Join Date:</strong> {{ student.join_date }}</p>
+                <!-- Add parent mobile number if it exists -->
+                {% if student.parent_mobile_number %}
+                    <p><strong>Parent Mobile Number:</strong> {{ student.parent_mobile_number }}</p>
+                {% endif %}
+                <input type="submit" value="Update Profile">
+            </form>
+        {% else %}
+            <p>No profile details found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<html>
+<head>
+    <title>MainPage</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f28d69;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
+        }
+        h1{
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            height: fit-content;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .radio-group{
+            display: inline-flex;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Student Leave and Permission Request</h1>
+
+<form id="requestForm">
+    <label for="userId">User ID:</label>
+    <input type="text" id="userId" name="userId" required>
+
+    <label for="branch">Branch:</label>
+    <select id="branch" name="branch" required>
+        <option value="CSE">CSE-Computer Science & Engineering</option>
+        <option value="CSM">CSM-Computer Science & Engineering(Artificial Intelligence & Machine Learining)</option>
+        <option value="CSO">CSO-Computer Science & Engineering(Internet of Things)</option>
+        <option value="CIC">CIC-Computer Science & Engineering(Internet of Things and Cyber Security including Blockchain Technology)</option>
+        <option value="AID">AID-Artificial Intelligence & Data Science</option>
+        <option value="AIM">AIM-Artificial Intelligent & Machine Learning</option>
+        <option value="INF">INF-Information Technology</option>
+        <option value="ECE">ECE-Electronics & Communication Engineering</option>
+        <option value="CIV">CIV-Civil Engineering</option>
+        <option value="EEE">EEE-Electrical and Electronics Engineering</option>
+        <option value="MEC">MEC-Mechanical Engineering</option>
+    </select>
+    <label for="requestType">Request Type</label>
+    <div class="radio-group">
+        <label for="permission">Permission</label>
+        <input type="radio" id="permission" name="requestType" value="permission" checked onclick="submitRequest()">
+    </div>
+
+    <div class="radio-group">
+            <label for="leave">Leave</label>
+            <input type="radio" id="leave" name="requestType" value="leave" onclick="submitRequest()">
+        </div>
+        
+        
+        
+    <script>
+        function submitRequest() {
+            var userId = document.getElementById('userId').value;
+            var branch = document.getElementById('branch').value;
+            var requestType = document.querySelector('input[name="requestType"]:checked').value;
+
+        if (requestType == 'leave') {
+            window.location.href = '{ % url "student-leave" %}';
+        } else if (requestType == 'permission') {
+            window.location.href = 'templates/authentication/permission.html';
+        }
+    }
+
+</script>
+</form>
+</body>
+</html>
+

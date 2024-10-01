@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updation</title>
+    
+    
+    <style>
+ body {
+            font-family: Arial, sans-serif;
+            background-color: #F28D69;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        h1 {
+            text-align: center;
+            color: green;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Adjust the maximum width as needed */
+            width: 100%;
+        }
+
+        label, input {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        input[type="date"], input[type="text"], select {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <h1>Updation Page</h1>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="rollNo">RollNo</label>
+                <input type="text" id="rollNo" name="rollNo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="studentName">Name</label>
+                <input type="text" id="studentName" name="studentName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="attendanceStatus">Status:</label>
+                <br>
+                <label>
+                    <input type="radio" name="status" value="Present"> Present
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="status" value="Absent"> Absent
+                </label>
+            </div>
+
+            <button type="submit">Update</button>
+            </div>
+        </form>
+     
+    <script>
+        function populate(s1, s2) {
+            var year_id = document.getElementById(s1).value;
+            var url = `/get_departments/?year_id=${year_id}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var s2 = document.getElementById(s2);
+                    s2.innerHTML = "";
+                    data.forEach(department => {
+                        var option = document.createElement("option");
+                        option.value = department.id;
+                        option.text = department.name;
+                        s2.add(option);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function populateSections(s2, s3) {
+            var department_id = document.getElementById(s2).value;
+            var url = `/get_sections/?department_id=${department_id}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var s3 = document.getElementById(s3);
+                    s3.innerHTML = "";
+                    data.forEach(section => {
+                        var option = document.createElement("option");
+                        option.value = section.id;
+                        option.text = section.name;
+                        s3.add(option);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function populateSubjects(s3, s4) {
+            var department_id = document.getElementById(s3).value;
+            var year_id = document.getElementById('slct1').value; // Correct the element ID if necessary
+            var url = `/get_subjects/?year_id=${year_id}&department_id=${department_id}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var s4 = document.getElementById(s4);
+                    s4.innerHTML = "";
+                    data.forEach(subject => {
+                        var option = document.createElement("option");
+                        option.value = subject.id;
+                        option.text = subject.name;
+                        s4.add(option);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+    
+</body>
+</html>

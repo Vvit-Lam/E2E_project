@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty Leave Request</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #F28D69;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+        }
+        .row select {
+            margin-right: 8px;
+        }
+        .remove-button {
+            background-color: #ff4c4c;
+            color: #fff;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .remove-button:hover {
+            background-color: #ff0000;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .add-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Faculty Leave Request</h1>
+
+<form id="leaveForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="leaveType">Type of Leave:</label>
+    <select id="leaveType" name="leaveType" required>
+        <option value="sick">Sick Leave</option>
+        <option value="emergency">Emergency Leave</option>
+        <option value="vacation">Vacation Leave</option>
+        <option value="casual">Casual Leave</option>
+        <option value="maternity">Maternity Leave</option>
+    </select>
+
+    <div id="classFacultyContainer">
+        <label>Class Hours and Adjust Faculty Name:</label>
+        <div class="row">
+            <select name="classHours" required>
+                <option value="9-10 AM">9-10 AM</option>
+                <option value="10-11 AM">10-11 AM</option>
+                <option value="11-12 PM">11-12 PM</option>
+                <option value="1-2 PM">1-2 PM</option>
+                <option value="2-3 PM">2-3 PM</option>
+                <option value="3-4 PM">3-4 PM</option>
+                <option value="4-5 PM">4-5 PM</option>
+            </select>
+            <select name="adjustFaculty" required>
+                <option value="Faculty 1">Faculty 1</option>
+                <option value="Faculty 2">Faculty 2</option>
+                <option value="Faculty 3">Faculty 3</option>
+                <option value="Faculty 4">Faculty 4</option>
+            </select>
+            <button type="button" class="remove-button" onclick="removeRow(this)">Remove</button>
+        </div>
+    </div>
+    <button type="button" class="add-button" onclick="addRow()">Add Class-Faculty Pair</button>
+
+    <button type="button" onclick="submitLeave()">Submit</button>
+    <button type="button" onclick="cancelLeave()">Cancel</button>
+</form>
+
+<script>
+    function addRow() {
+        var container = document.getElementById('classFacultyContainer');
+        var newRow = document.createElement('div');
+        newRow.className = 'row';
+        newRow.innerHTML = `
+            <select name="classHours" required>
+                <option value="9-10 AM">9-10 AM</option>
+                <option value="10-11 AM">10-11 AM</option>
+                <option value="11-12 PM">11-12 PM</option>
+                <option value="1-2 PM">1-2 PM</option>
+                <option value="2-3 PM">2-3 PM</option>
+                <option value="3-4 PM">3-4 PM</option>
+                <option value="4-5 PM">4-5 PM</option>
+            </select>
+            <select name="adjustFaculty" required>
+                <option value="Faculty 1">Faculty 1</option>
+                <option value="Faculty 2">Faculty 2</option>
+                <option value="Faculty 3">Faculty 3</option>
+                <option value="Faculty 4">Faculty 4</option>
+            </select>
+            <button type="button" class="remove-button" onclick="removeRow(this)">Remove</button>
+        `;
+        container.appendChild(newRow);
+    }
+
+    function removeRow(button) {
+        var row = button.parentElement;
+        row.parentElement.removeChild(row);
+    }
+
+    function submitLeave() {
+        var name = document.getElementById('name').value;
+        if (name.trim() === '') {
+            alert('Name must be provided');
+            return;
+        }
+        alert('Leave request submitted successfully!');
+        document.getElementById('leaveForm').reset();
+        location.reload(); // Refreshes the page
+    }
+    
+    function cancelLeave() {
+        alert('Leave request canceled.');
+        document.getElementById('leaveForm').reset();
+    }
+</script>
+
+</body>
+</html>

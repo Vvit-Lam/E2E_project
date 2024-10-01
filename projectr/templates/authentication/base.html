@@ -1,0 +1,30 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Head content -->
+  </head>
+  <body>
+    <header>
+      <!-- Header content -->
+      {% if user.is_authenticated %}
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user.username }}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          </div>
+        </div>
+      {% endif %}
+    </header>
+
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    <!-- Footer content -->
+  </body>
+</html>

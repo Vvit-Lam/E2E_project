@@ -1,0 +1,83 @@
+<html>
+<head>
+    
+    <title>Permission Request</title>
+    <style>
+       body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #F28D69;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1{
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Permission Request</h1>
+
+<form id="permissionForm">
+    <label for="Date">Date on which Permission is required:</label>
+    <input type="date" id="Date" name="Date" required>
+
+    <label for="fromTime">From Time:</label>
+    <input type="time" id="" name="fromTime" required>
+
+    <label for="toTime">To Time:</label>
+    <input type="time" id="toTime" name="toTime" required>
+
+    <label for="permissionReason">Reason for Permission:</label>
+    <textarea id="permissionReason" name="permissionReason" rows="4" required></textarea>
+
+    <button type="button" onclick="submitPermission()">Submit</button>
+    <button type="button" onclick="cancelPermission()">Cancel</button>
+</form>
+
+<script>
+    function submitPermission() {
+        // Add logic to handle the submission of permission request
+        alert('Permission request submitted successfully!');
+        document.getElementById('permissionForm').reset();
+    }
+
+    function cancelPermission() {
+        // Add logic to handle the cancellation of permission request
+        alert('Permission request canceled.');
+        document.getElementById('permissionForm').reset();
+    }
+</script>
+
+</body>
+</html>

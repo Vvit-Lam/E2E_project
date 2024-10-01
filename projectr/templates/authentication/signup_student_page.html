@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title style:"text-align=center">Signup Student</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static "plugins/fontawesome-free/css/all.min.css" %}">
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="{% static "plugins/bootstrap/css/bootstrap.min.css" %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static "dist/css/adminlte.min.css" %}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+    }
+    .login-box {
+      margin: 50px auto;
+      max-width:400px;
+      background: #fff;
+      border-radius: 33px;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .login-logo {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .login-logo a {
+      color: #333;
+      font-size: 26px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .login-card-body {
+      padding: 20px;
+    }
+    .form-group {
+      margin-bottom: 25px;
+    }
+    .form-control {
+      border-radius: 50px;
+      padding:7px;
+      font-size: 23px;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      border-radius: 30px;
+      padding: 10px 20px;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+    .signup-link {
+      text-align: center;
+      padding: 20px;
+    }
+    .signup-link a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="hold-transition login-page">
+  <div class="video-background">
+    <video autoplay muted loop>
+      <source src="https://assets.codepen.io/3364143/forest-river-video-1.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="#">EVA</a>
+    </div>
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Signup Student</p>
+        <form action="/do_signup_student" method="post" id="demo-form" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email" name="email">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="First Name" name="first_name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Last Name" name="last_name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username" name="username">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" name="password">
+          </div>
+          <div class="form-group">
+            <input type="tel" class="form-control" id="mobile_number" name="mobile_number" placeholder="Enter mobile number">
+          </div>
+          <div class="form-group">
+            <select class="form-control" name="sex">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="file" class="form-control" placeholder="Image" name="profile_pic">
+          </div>
+          <div class="form-group">
+            <select class="form-control" name="session_year">
+              {% for sessionyear in session_years %}
+              <option value="{{ sessionyear.id }}">{{ sessionyear.session_start_year }} - {{ sessionyear.session_end_year }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block">Sign Up Student</button>
+            </div>
+          </div>
+          <div class="row">
+            {% if messages %}
+           <div class="col-12">
+              {% for message in messages %}
+              {% if message.tags == 'error' %}
+              <div class="alert alert-danger" style="margin-top:10px" href="{% url 'ShowLoginPage' %}">{{ message }}</div>
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="{% static "plugins/jquery/jquery.min.js" %}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="{% static "plugins/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+  <!-- AdminLTE App -->
+  <script src="{% static "dist/js/adminlte.min.js" %}"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <script>
+    // Get the video element
+    const videoElement = document.querySelector('.video-background video');
+
+    // Function to change the video source
+    function changeVideoSource() {
+      videoElement.src = 'https://assets.codepen.io/3364143/forest-river-video-2.mp4';
+    }
+
+    // Call the changeVideoSource function every 3 seconds (3000 milliseconds)
+    setInterval(changeVideoSource, 3000);
+  </script>
+</body>
+</html>

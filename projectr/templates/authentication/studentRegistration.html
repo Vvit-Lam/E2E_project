@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+</head>
+<body>
+    <h1>Student Registration Form</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="sfname">First Name:</label><br>
+        <input type="text" id="sfname" name="a" required><br>
+        <label for="slname">Last Name:</label><br>
+        <input type="text" id="slname" name="b" required><br>
+        <label for="smail">Email:</label><br>
+        <input type="email" id="smail" name="c" required><br>
+        <label for="smobile">Mobile Number:</label><br>
+        <input type="text" id="smobile" name="d" required><br>
+        <label for="spswd">Password:</label><br>
+        <input type="password" id="spswd" name="e" required><br>
+        <label for="scpswd">Confirm Password:</label><br>
+        <input type="password" id="scpswd" name="f" required><br>
+        <button type="submit">Register</button>
+    </form>
+    <p><a href="{% url 'login' %}">Already have an account? Login here</a></p>
+</body>
+</html>

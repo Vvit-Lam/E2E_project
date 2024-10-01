@@ -1,0 +1,22 @@
+<!-- profile.html -->
+
+
+{% block content %}
+  <h1>Welcome, {{ user.username }}</h1>
+  <div>
+    <img src="{{ user_profile.profile_pic.url }}" alt="Profile Picture">
+    <p>{{ user_profile.bio }}</p>
+    <!-- Add other profile information here -->
+  </div>
+
+  <!-- User Dropdown Menu -->
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ user.username }}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="userDropdown">
+      <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+      <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 125vh;
+    }
+
+    .background-image {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      padding: 22px;
+      font-family: cursive;
+      border: 2px solid #E2A9A9;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #FFFFFF;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      font-family: serif;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: calc(100% - 10px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #E2A9A9;
+      border-radius: 5px;
+      display: inline-block;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #FF7F7F;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: yellow;
+      color: yellow;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: red;
+    }
+
+    .alert-danger {
+      color: #FF7F7F;
+    }
+  </style>
+</head>
+<body class="background-image">
+  <div class="container">
+    <form method="post">
+      {% csrf_token %}
+      <!-- signup.html -->
+      <div class="form-group">
+        <label for="userName">User Name:</label>
+        <input type="text" id="userName" name="userName" required>
+        <br>
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <br>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <br>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="mobile">Mobile Number:</label>
+        <input type="text" id="mobile" name="phonenumber" required>
+        <br>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <label for="cpassword">Confirm Password:</label>
+        <input type="password" id="cpassword" name="cpassword" required>
+        <br>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">Sign Up</button>
+      </div>
+
+      <div id="confirmationMessage" style="display: none;">
+        <p>Registration successful! Thank you.</p>
+      </div>
+    </form>
+
+    <p><a href="{% url 'signup_staff' %}">create account for staff</a></p>
+    <p><a href="{% url 'signup_admin' %}">create account for admin</a></p>
+    <p><a href="{% url 'signin' %}">Already have an account? Login here</a></p>
+
+    <div class="form-group">
+      {% for message in messages %}
+      <div class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+
+    <script defer>
+      // JavaScript to hide error messages after 5 seconds
+      document.addEventListener('DOMContentLoaded', function() {
+        var alertMessages = document.querySelectorAll('.alert-danger');
+        alertMessages.forEach(function(message) {
+          setTimeout(function() {
+            message.style.display = 'none';
+          }, 1000); // Set the time in milliseconds (5 seconds in this example)
+        });
+      });
+    </script>
+  </div>
+
+  <script>
+    const backgroundImages = [
+      'url(https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1975&q=80)',
+      'url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1970&q=80)',
+      'url(https://images.unsplash.com/photo-1515238234500-7395d3f59b04?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80)',
+      'url(https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1970&q=80)',
+      'url(https://images.unsplash.com/photo-1501004766094-4e2bb570d1d1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1970&q=80)'
+    ];
+
+    let currentImageIndex = 0;
+
+    function changeBackgroundImage() {
+      document.body.style.backgroundImage = backgroundImages[currentImageIndex];
+      currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+    }
+
+    setInterval(changeBackgroundImage, 3250); // Change background image every 250 milliseconds
+  </script>
+</body>
+</html>

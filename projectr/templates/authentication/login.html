@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #FFEFD5; /* Lighten the background color */
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .login {
+            padding: 20px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjusted background color */
+            border-radius: 15px; /* Rounded border */
+            box-shadow: 1px 1px 10px cyan; /* Reduced box-shadow intensity */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+            margin: auto; /* Center the form on the page */
+            margin-top: 50px; /* Add some top margin */
+        }
+
+        .login header {
+            margin-bottom: 15px; /* Adjusted margin for header */
+        }
+
+        img {
+            width: 80px;
+            border-radius: 50%;
+            box-shadow: 1px 1px 10px cyan; /* Reduced box-shadow intensity */
+        }
+
+        .field {
+            border: 1px solid black;
+            border-radius: 25px; /* Rounded border */
+            background-color: transparent;
+            width: 100%;
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .field span {
+            color: white;
+            width: 40px;
+            line-height: 45px;
+            text-align: center;
+        }
+
+        .field input {
+            width: calc(100% - 40px); /* Adjusted input width */
+            height: 45px;
+            font-size: 1.1rem;
+            padding: 5px;
+            color: cyan;
+            background-color: transparent;
+            border: none;
+        }
+
+        .user-type {
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .user-type label {
+            margin-right: 15px;
+        }
+
+        .user-type input {
+            margin-right: 5px;
+        }
+
+        .submit {
+            width: 100%;
+            height: 35px;
+            margin-top: 9px;
+            margin-bottom: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 25px; /* Adjusted border-radius */
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background-color: orangered;
+        }
+
+        .forgot-password {
+            width: 100%;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .forgot-password a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add styles for the "Not Authenticated" message */
+        p {
+            text-align: center;
+            color: white;
+        }
+
+        /* Move these styles together */
+        input:focus, input:hover, input:active {
+            outline: none;
+        }
+
+        .field input::placeholder {
+            color: #ccc; /* Adjust the color to make it more visible */
+        }
+
+        .field input:focus::placeholder,
+        .field input:hover::placeholder,
+        .field input:active::placeholder {
+            color: #aaa; /* Adjust the color when the input is focused or hovered */
+        }
+    </style>
+</head>
+
+<body>
+   
+    <div class="login">
+        
+        <header><img src="https://upload.wikimedia.org/wikipedia/commons/1/18/A_View_of_Central_Block_of_VVIT.jpg" alt="VVIT Building"></header>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit">Login</button>
+            
+            {% if messages %}
+                <div class="form-group">
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <script defer>
+                    // JavaScript to hide error messages after 5 seconds
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var alertMessages = document.querySelectorAll('.alert-danger');
+                        alertMessages.forEach(function(message) {
+                            setTimeout(function() {
+                                message.style.display = 'none';
+                            }, 1000); // Set the time in milliseconds (5 seconds in this example)
+                        });
+                    });
+                </script>
+            {% endif %}
+       
+        </form>
+    </div>
+</body>
+</html>
+ 

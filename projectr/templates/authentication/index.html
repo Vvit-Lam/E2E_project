@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="project">
+    <meta name="language" content="English">
+    <meta name="author" content="vinayak sharma">
+
+    <title>{{ title }}</title>
+
+    <!-- Bootstrap files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('C:\\Users\\Balaram Krishna\\Pictures\\anna garu (2).jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        header {
+            background-color: #333; /* Add a constant background color */
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .logo {
+            display: inline-block;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .navbar {
+            background-color: transparent;
+            border: none;
+            margin-bottom: 0;
+        }
+
+        .navbar-inverse .navbar-brand,
+        .navbar-inverse .navbar-nav>li>a {
+            color: #fff;
+        }
+
+        .navbar-inverse .navbar-brand:hover,
+        .navbar-inverse .navbar-nav>li>a:hover {
+            color: #333;
+        }
+
+        .navbar-inverse .navbar-toggle {
+            border-color: #333;
+        }
+
+        .navbar-inverse .navbar-toggle:hover,
+        .navbar-inverse .navbar-toggle:focus {
+            background-color: #333;
+        }
+
+        .navbar-nav .nav-item {
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            background-color: #f8f9fa;
+            color: black;
+        }
+
+        .image-slider {
+            margin-top: 70px; /* Adjust based on header height */
+            width: 100%;
+            height: calc(100vh - 70px);
+            overflow: hidden;
+        }
+
+        .image-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .image-slider img.active {
+            opacity: 1;
+        }
+
+        @keyframes imageSlider {
+            0% {
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="container-fluid">
+    <header>
+        <!-- Logo -->
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/A_View_of_Central_Block_of_VVIT.jpg" alt="Representative Logo">
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="top: 60px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="mainNavBar">
+                <ul class="nav navbar-nav">
+                    <!-- Home -->
+                    <li><a href="#">Home</a></li>
+
+                    <!-- About Us Dropdown -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Us <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">About Us Detail 1</a></li>
+                            <li><a href="#">About Us Detail 2</a></li>
+                            <li><a href="#">About Us Detail 3</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Services Dropdown -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Service 1</a></li>
+                            <li><a href="#">Service 2</a></li>
+                            <li><a href="#">Service 3</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Contact Dropdown -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contact <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Contact Detail 1</a></li>
+                            <li><a href="#">Contact Detail 2</a></li>
+                            <li><a href="#">Contact Detail 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- User Authentication Links -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'signin' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-log-in"></span> Signup</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Image Slider -->
+    <div class="image-slider">
+        <img class="active" src="https://timess3spore.s3.amazonaws.com/ndata/media/Counsellor/CollegeImage/2023/04/03/1680506278.jpg" alt="Slide 1">
+        <img src="https://timess3spore.s3.amazonaws.com/ndata/media/Counsellor/CollegeImage/2023/04/03/1680506278.jpg" alt="Slide 2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/A_View_of_Central_Block_of_VVIT.jpg" alt="slide 3">
+        <!-- Add more images as needed -->
+    </div>
+
+    <script>
+        // JavaScript for image slider
+        var currentSlide = 0;
+        var slides = document.querySelectorAll('.image-slider img');
+
+        function showSlide(index) {
+            slides.forEach(function (slide) {
+                slide.classList.remove('active');
+            });
+            slides[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Style for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Timetable</h2>
+    <div align="right">
+        <label for="section">Section</label>
+        <select name="section" id="section" onchange="loadSubjects()">
+            <option value="">--choose section--</option>
+            <option value="csm">CSM</option>
+            <option value="aim">AIM</option>
+            <option value="it">IT</option>
+            <option value="cse">CSE</option>
+ <option value="ece">ECE</option>
+ <option value="civil">CIVIL</option>
+ <option value="eee">EEE</option>
+ <option value="cso">CSO</option>
+ <option value="aids">AIDS</option>
+ <option value="mech">MECH</option>
+ <option value="cic">CIC</option>
+ <option value="cso">CSO</option>
+        </select>
+    </div>
+    <div align="left">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required>
+    </div>
+
+    <table id="timetable">
+        <tr>
+            <th>Time</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+        </tr>
+        <tr>
+            <td>8:20 AM - 9:15 AM</td>
+            <td><input type="text" name="monday_8am" ondblclick="openDialog('monday_8am')"></td>
+            <td><input type="text" name="tuesday_8am" ondblclick="openDialog('tuesday_8am')"></td>
+            <td><input type="text" name="wednesday_8am" ondblclick="openDialog('wednesday_8am')"></td>
+            <td><input type="text" name="thursday_8am" ondblclick="openDialog('thursday_8am')"></td>
+            <td><input type="text" name="friday_8am" ondblclick="openDialog('friday_8am')"></td>
+            <td><input type="text" name="saturday_8am" ondblclick="openDialog('saturday_8am')"></td>
+        </tr>
+        <!-- Add more rows as needed -->
+        <tr>
+            <td>09:15 AM - 10:10 AM</td>
+            <td><input type="text" name="monday_9am" ondblclick="openDialog('monday_9am')"></td>
+            <td><input type="text" name="tuesday_9am" ondblclick="openDialog('tuesday_9am')"></td>
+            <td><input type="text" name="wednesday_9am" ondblclick="openDialog('wednesday_9am')"></td>
+            <td><input type="text" name="thursday_9am" ondblclick="openDialog('thursday_9am')"></td>
+            <td><input type="text" name="friday_9am" ondblclick="openDialog('friday_9am')"></td>
+            <td><input type="text" name="saturday_9am" ondblclick="openDialog('saturday_9am')"></td>
+        </tr>
+        <!-- Add more rows as needed -->
+        <tr>
+            <td>10:20 AM - 11:15 AM</td>
+            <td><input type="text" name="monday_10am" ondblclick="openDialog('monday_10am')"></td>
+            <td><input type="text" name="tuesday_10am" ondblclick="openDialog('tuesday_10am')"></td>
+            <td><input type="text" name="wednesday_10am" ondblclick="openDialog('wednesday_10am')"></td>
+            <td><input type="text" name="thursday_10am" ondblclick="openDialog('thursday_10am')"></td>
+            <td><input type="text" name="friday_10am" ondblclick="openDialog('friday_10am')"></td>
+            <td><input type="text" name="saturday_10am" ondblclick="openDialog('saturday_10am')"></td>
+        </tr>
+<tr>
+            <td>11:15 AM - 12:10 PM</td>
+            <td><input type="text" name="monday_11am" ondblclick="openDialog('monday_11am')"></td>
+            <td><input type="text" name="tuesday_11am" ondblclick="openDialog('tuesday_11am')"></td>
+            <td><input type="text" name="wednesday_11am" ondblclick="openDialog('wednesday_11am')"></td>
+            <td><input type="text" name="thursday_11am" ondblclick="openDialog('thursday_11am')"></td>
+            <td><input type="text" name="friday_11am" ondblclick="openDialog('friday_11am')"></td>
+            <td><input type="text" name="saturday_11am" ondblclick="openDialog('saturday_11am')"></td>
+        </tr>
+<tr>
+            <td>12:50 PM - 01:45 PM</td>
+            <td><input type="text"name="monday_12pm" ondblclick="openDialog('monday_12pm')"></td>
+            <td><input type="text"name="tuesday_12pm" ondblclick="openDialog('tuesday_12pm')"></td>
+            <td><input type="text"name="wednesday_12pm" ondblclick="openDialog('wednesday_12pm')"></td>
+            <td><input type="text"name="thursday_12pm" ondblclick="openDialog('thursday_12pm')"></td>
+            <td><input type="text"name="friday_12pm" ondblclick="openDialog('friday_12pm')"></td>
+            <td><input type="text"name="saturday_12pm" ondblclick="openDialog('saturday_12pm')"></td>
+        </tr>
+<tr>
+            <td>01:45 PM - 02:25 PM</td>
+            <td><input type="text"name="monday_01pm" ondblclick="openDialog('monday_01pm')"></td>
+            <td><input type="text"name="tuesday_01pm" ondblclick="openDialog('tuesday_01pm')"></td>
+            <td><input type="text"name="wednesday_01pm" ondblclick="openDialog('wednesday_01pm')"></td>
+            <td><input type="text"name="thursday_01pm" ondblclick="openDialog('thursday_01pm')"></td>
+            <td><input type="text"name="friday_01pm" ondblclick="openDialog('friday_01pm')"></td>
+            <td><input type="text"name="saturday_01pm" ondblclick="openDialog('saturday_01pm')"></td>
+        </tr>
+<tr>
+            <td>02:35 PM - 03:25 PM</td>
+            <td><input type="text"name="monday_02pm" ondblclick="openDialog('monday_02pm')"></td>
+            <td><input type="text"name="tuesday_02pm" ondblclick="openDialog('tuesday_02pm')"></td>
+            <td><input type="text"name="wednesday_02pm" ondblclick="openDialog('wednesday_02pm')"></td>
+            <td><input type="text"name="thursday_02pm" ondblclick="openDialog('thursday_02pm')"></td>
+            <td><input type="text"name="friday_02pm" ondblclick="openDialog('friday_02pm')"></td>
+            <td><input type="text"name="saturday_02pm" ondblclick="openDialog('saturday_02pm')"></td>
+        </tr>
+<tr>
+            <td>03:35 PM - 04:00 PM</td>
+            <td><input type="text"name="monday_03pm" ondblclick="openDialog('monday_03pm')"></td>
+            <td><input type="text"name="tuesday_03pm" ondblclick="openDialog('tuesday_03pm')"></td>
+            <td><input type="text"name="wednesday_03pm" ondblclick="openDialog('wednesday_03pm')"></td>
+            <td><input type="text"name="thursday_03pm" ondblclick="openDialog('thursday_03pm')"></td>
+            <td><input type="text"name="friday_03pm" ondblclick="openDialog('friday_03pm')"></td>
+            <td><input type="text"name="saturday_03pm" ondblclick="openDialog('saturday_03pm')"></td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </table>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span onclick="closeDialog()" style="float:right; cursor:pointer;">&times;</span>
+            <p id="dialogContent">Content of the dialog box goes here.</p>
+            <button onclick="sendMessage()">Send Message</button>
+            <button onclick="saveTimetable()">Save Timetable</button>
+        </div>
+    </div>
+
+    <!-- Save buttons -->
+    <button onclick="savePage()">Save Page</button>
+    <button onclick="exportToExcel()">Export to Excel</button>
+    <button onclick="savePageAsImage()">Save Page as JPEG</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+    <script>
+        function loadSubjects() {
+            var section = document.getElementById('section').value;
+            var subjects = getSubjectsForSection(section);
+
+            // Assuming you have more rows and time slots, update them similarly
+            document.getElementsByName("monday_8am")[0].value = subjects.monday_8am || '';
+            document.getElementsByName("tuesday_8am")[0].value = subjects.tuesday_8am || '';
+            document.getElementsByName("wednesday_8am")[0].value = subjects.wednesday_8am || '';
+            document.getElementsByName("thursday_8am")[0].value = subjects.thursday_8am || '';
+            document.getElementsByName("friday_8am")[0].value = subjects.friday_8am || '';
+            document.getElementsByName("saturday_8am")[0].value = subjects.saturday_8am || '';
+            document.getElementsByName("monday_9am")[0].value = subjects.monday_9am || '';
+            document.getElementsByName("tuesday_9am")[0].value = subjects.tuesday_9am || '';
+            document.getElementsByName("wednesday_9am")[0].value = subjects.wednesday_9am || '';
+            document.getElementsByName("thursday_9am")[0].value = subjects.thursday_9am || '';
+            document.getElementsByName("friday_9am")[0].value = subjects.friday_9am || '';
+            document.getElementsByName("saturday_9am")[0].value = subjects.saturday_9am || '';
+	document.getElementsByName("monday_10am")[0].value = subjects.monday_10am || '';
+            document.getElementsByName("tuesday_10am")[0].value = subjects.tuesday_10am || '';
+            document.getElementsByName("wednesday_10am")[0].value = subjects.wednesday_10am || '';
+            document.getElementsByName("thursday_10am")[0].value = subjects.thursday_10am || '';
+            document.getElementsByName("friday_10am")[0].value = subjects.friday_10am || '';
+            document.getElementsByName("saturday_10am")[0].value = subjects.saturday_10am || '';
+		document.getElementsByName("monday_11am")[0].value = subjects.monday_11am || '';
+            document.getElementsByName("tuesday_11am")[0].value = subjects.tuesday_11am || '';
+            document.getElementsByName("wednesday_11am")[0].value = subjects.wednesday_11am || '';
+            document.getElementsByName("thursday_11am")[0].value = subjects.thursday_11am || '';
+            document.getElementsByName("friday_11am")[0].value = subjects.friday_11am || '';
+            document.getElementsByName("saturday_11am")[0].value = subjects.saturday_11am || '';
+		document.getElementsByName("monday_12pm")[0].value = subjects.monday_12pm || '';
+            document.getElementsByName("tuesday_12pm")[0].value = subjects.tuesday_12pm || '';
+            document.getElementsByName("wednesday_12pm")[0].value = subjects.wednesday_12pm || '';
+            document.getElementsByName("thursday_12pm")[0].value = subjects.thursday_12pm || '';
+            document.getElementsByName("friday_12pm")[0].value = subjects.friday_12pm || '';
+            document.getElementsByName("saturday_12pm")[0].value = subjects.saturday_12pm || '';
+		document.getElementsByName("monday_01pm")[0].value = subjects.monday_01pm || '';
+            document.getElementsByName("tuesday_01pm")[0].value = subjects.tuesday_01pm || '';
+            document.getElementsByName("wednesday_01pm")[0].value = subjects.wednesday_01pm || '';
+            document.getElementsByName("thursday_01pm")[0].value = subjects.thursday_01pm || '';
+            document.getElementsByName("friday_01pm")[0].value = subjects.friday_01pm || '';
+            document.getElementsByName("saturday_01pm")[0].value = subjects.saturday_01pm || '';
+		document.getElementsByName("monday_02pm")[0].value = subjects.monday_02pm || '';
+            document.getElementsByName("tuesday_02pm")[0].value = subjects.tuesday_02pm || '';
+            document.getElementsByName("wednesday_02pm")[0].value = subjects.wednesday_02pm || '';
+            document.getElementsByName("thursday_02pm")[0].value = subjects.thursday_02pm || '';
+            document.getElementsByName("friday_02pm")[0].value = subjects.friday_02pm || '';
+            document.getElementsByName("saturday_02pm")[0].value = subjects.saturday_02pm || '';
+		document.getElementsByName("monday_03pm")[0].value = subjects.monday_03pm || '';
+            document.getElementsByName("tuesday_03pm")[0].value = subjects.tuesday_03pm || '';
+            document.getElementsByName("wednesday_03pm")[0].value = subjects.wednesday_03pm || '';
+            document.getElementsByName("thursday_03pm")[0].value = subjects.thursday_03pm || '';
+            document.getElementsByName("friday_03pm")[0].value = subjects.friday_03pm || '';
+            document.getElementsByName("saturday_03pm")[0].value = subjects.saturday_03pm || '';
+		
+		
+	
+            // Update the names for other time slots as needed
+            // Update the names for other time slots as needed
+		
+        }
+
+        function getSubjectsForSection(section) {
+            // Customize this function to retrieve subjects based on the selected section
+            // This is just an example, you may fetch data from a database or use any other method
+            switch (section) {
+                case 'csm':
+                    return {
+                        monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+			
+			
+			
+                        // Add more subjects as needed
+                    };
+                case 'aim':
+                    return {
+                        monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+                    };
+		case 'cse':
+                    return {
+                        monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+                    };
+case 'it':
+                    return {
+                        monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+                    };
+case 'mech':
+                    return {
+                        monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+                    };
+case 'ece':
+                    return {
+                        monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+                    };
+case 'eee':
+                    return {
+                       monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+                    };
+case 'cic':
+                    return {
+                       monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+                    };
+case 'cso':
+                    return {
+                       monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+                    };
+case 'aids':
+                    return {
+                       monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+                    };
+case 'civil':
+                    return {
+			monday_8am: 'Math',
+			monday_9am: 'Math',
+			monday_10am: 'science',
+			monday_11am: 'Math',
+			monday_12pm: 'amm',
+			monday_01pm: 'am',
+			monday_02pm: 'Math',
+			monday_03pm: 'Math',
+                        tuesday_8am: 'Physics',
+			tuesday_9am: 'Physics',
+                        tuesday_10am: 'Physics',
+			tuesday_11am: 'Physics',
+tuesday_12pm: 'Physics',
+tuesday_01pm: 'Physics',
+tuesday_02pm: 'Physics',
+tuesday_03pm: 'Physics',
+
+                        wednesday_8am: 'Chemistry',
+wednesday_9am: 'Chemistry',
+wednesday_10am: 'Chemistry',
+wednesday_11am: 'Chemistry',
+wednesday_12pm: 'Chemistry',
+wednesday_01pm: 'Chemistry',
+wednesday_02pm: 'Chemistry',
+wednesday_03pm: 'Chemistry',
+                        thursday_8am: 'Biology',
+thursday_9am: 'Biology',
+thursday_10am: 'Biology',
+thursday_11am: 'Biology',
+thursday_12pm: 'Biology',
+thursday_01pm: 'Biology',
+thursday_02pm: 'Biology',
+thursday_03pm: 'Biology',
+                        friday_8am: 'English',
+friday_9am: 'English',
+friday_10am: 'English',
+friday_11am: 'English',
+friday_12pm: 'English',
+friday_01pm: 'English',
+friday_02pm: 'English',
+friday_03pm: 'English',
+                        saturday_8am: 'Physical Education',
+saturday_9am: 'Physical Education',
+saturday_10am: 'Physical Education',
+saturday_11am: 'Physical Education',
+saturday_12pm: 'Physical Education',
+saturday_01pm: 'Physical Education',
+saturday_02pm: 'Physical Education',
+saturday_03pm: 'Physical Education',
+                     
+                    };
+
+                // Add cases for other sections
+
+                default:
+                    return {};
+            }
+        }
+
+        function openDialog(dayTime) {
+            var modal = document.getElementById('myModal');
+            var dialogContent = document.getElementById('dialogContent');
+
+            // Set content based on the clicked input
+            dialogContent.textContent = 'You double-clicked on ' + dayTime;
+
+            modal.style.display = 'block';
+        }
+
+        function closeDialog() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'none';
+        }
+
+        function sendMessage() {
+            // Customize this function to send a message or perform any desired action
+            alert('Message sent!');
+            closeDialog(); // Close the dialog after sending the message
+        }
+
+        function saveTimetable() {
+            // Retrieve timetable data
+            var timetableData = {};
+
+            // Assuming you have more rows and time slots, add them similarly
+            timetableData["monday_8am"] = document.getElementsByName("monday_8am")[0].value;
+            timetableData["tuesday_8am"] = document.getElementsByName("tuesday_8am")[0].value;
+            timetableData["wednesday_8am"] = document.getElementsByName("wednesday_8am")[0].value;
+            timetableData["thursday_8am"] = document.getElementsByName("thursday_8am")[0].value;
+            timetableData["friday_8am"] = document.getElementsByName("friday_8am")[0].value;
+            timetableData["saturday_8am"] = document.getElementsByName("saturday_8am")[0].value;
+		timetableData["monday_9am"] = document.getElementsByName("monday_9am")[0].value;
+            timetableData["tuesday_9am"] = document.getElementsByName("tuesday_9am")[0].value;
+            timetableData["wednesday_9am"] = document.getElementsByName("wednesday_9am")[0].value;
+            timetableData["thursday_9am"] = document.getElementsByName("thursday_9am")[0].value;
+            timetableData["friday_9am"] = document.getElementsByName("friday_9am")[0].value;
+            timetableData["saturday_9am"] = document.getElementsByName("saturday_9am")[0].value;
+		timetableData["monday_10am"] = document.getElementsByName("monday_10am")[0].value;
+            timetableData["tuesday_10am"] = document.getElementsByName("tuesday_10am")[0].value;
+            timetableData["wednesday_10am"] = document.getElementsByName("wednesday_10am")[0].value;
+            timetableData["thursday_10am"] = document.getElementsByName("thursday_10am")[0].value;
+            timetableData["friday_10am"] = document.getElementsByName("friday_10am")[0].value;
+            timetableData["saturday_10am"] = document.getElementsByName("saturday_10am")[0].value;
+		timetableData["monday_11am"] = document.getElementsByName("monday_11am")[0].value;
+            timetableData["tuesday_11am"] = document.getElementsByName("tuesday_11am")[0].value;
+            timetableData["wednesday_11am"] = document.getElementsByName("wednesday_11am")[0].value;
+            timetableData["thursday_11am"] = document.getElementsByName("thursday_11am")[0].value;
+            timetableData["friday_11am"] = document.getElementsByName("friday_11am")[0].value;
+            timetableData["saturday_11am"] = document.getElementsByName("saturday_11am")[0].value;
+		timetableData["monday_12pm"] = document.getElementsByName("monday_12pm")[0].value;
+            timetableData["tuesday_12pm"] = document.getElementsByName("tuesday_12pm")[0].value;
+            timetableData["wednesday_12pm"] = document.getElementsByName("wednesday_12pm")[0].value;
+            timetableData["thursday_12pm"] = document.getElementsByName("thursday_12pm")[0].value;
+            timetableData["friday_12pm"] = document.getElementsByName("friday_12pm")[0].value;
+            timetableData["saturday_12pm"] = document.getElementsByName("saturday_12pm")[0].value;
+		timetableData["monday_01pm"] = document.getElementsByName("monday_01pm")[0].value;
+            timetableData["tuesday_01pm"] = document.getElementsByName("tuesday_01pm")[0].value;
+            timetableData["wednesday_01pm"] = document.getElementsByName("wednesday_01pm")[0].value;
+            timetableData["thursday_01pm"] = document.getElementsByName("thursday_01pm")[0].value;
+            timetableData["friday_01pm"] = document.getElementsByName("friday_01pm")[0].value;
+            timetableData["saturday_01pm"] = document.getElementsByName("saturday_01pm")[0].value;
+		timetableData["monday_02pm"] = document.getElementsByName("monday_02pm")[0].value;
+            timetableData["tuesday_02pm"] = document.getElementsByName("tuesday_02pm")[0].value;
+            timetableData["wednesday_02pm"] = document.getElementsByName("wednesday_02pm")[0].value;
+            timetableData["thursday_02pm"] = document.getElementsByName("thursday_02pm")[0].value;
+            timetableData["friday_02pm"] = document.getElementsByName("friday_02pm")[0].value;
+            timetableData["saturday_02pm"] = document.getElementsByName("saturday_02pm")[0].value;
+		timetableData["monday_03pm"] = document.getElementsByName("monday_03pm")[0].value;
+            timetableData["tuesday_03pm"] = document.getElementsByName("tuesday_03pm")[0].value;
+            timetableData["wednesday_03pm"] = document.getElementsByName("wednesday_03pm")[0].value;
+            timetableData["thursday_03pm"] = document.getElementsByName("thursday_03pm")[0].value;
+            timetableData["friday_03pm"] = document.getElementsByName("friday_03pm")[0].value;
+            timetableData["saturday_03pm"] = document.getElementsByName("saturday_03pm")[0].value;
+		
+            // Update the names for other time slots as needed
+		
+
+            // Store data in local storage
+            localStorage.setItem('timetableData', JSON.stringify(timetableData));
+
+            alert('Timetable saved!');
+        }
+
+        function savePage() {
+            // Get the entire HTML content
+            var htmlContent = document.documentElement.outerHTML;
+
+            // Create a Blob containing the HTML content
+            var blob = new Blob([htmlContent], { type: 'text/html' });
+
+            // Create a link element and trigger a download
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'timetable_page.html';
+            a.click();
+        }
+
+        function exportToExcel() {
+            // Retrieve timetable data
+            var timetableData = [];
+
+            // Assuming you have more rows and time slots, add them similarly
+            timetableData.push([
+                "Time",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ]);
+
+            timetableData.push([
+                "08:20 AM - 09:15 AM",
+                document.getElementsByName("monday_8am")[0].value,
+                document.getElementsByName("tuesday_8am")[0].value,
+                document.getElementsByName("wednesday_8am")[0].value,
+                document.getElementsByName("thursday_8am")[0].value,
+                document.getElementsByName("friday_8am")[0].value,
+                document.getElementsByName("saturday_8am")[0].value
+            ]);
+
+            timetableData.push([
+                "09:15 AM - 10:10 AM",
+                document.getElementsByName("monday_9am")[0].value,
+                document.getElementsByName("tuesday_9am")[0].value,
+                document.getElementsByName("wednesday_9am")[0].value,
+                document.getElementsByName("thursday_9am")[0].value,
+                document.getElementsByName("friday_9am")[0].value,
+                document.getElementsByName("saturday_9am")[0].value
+            ]);
+
+            timetableData.push([
+                "10:20 AM - 11:15 AM",
+                document.getElementsByName("monday_10am")[0].value,
+                document.getElementsByName("tuesday_10am")[0].value,
+                document.getElementsByName("wednesday_10am")[0].value,
+                document.getElementsByName("thursday_10am")[0].value,
+                document.getElementsByName("friday_10am")[0].value,
+                document.getElementsByName("saturday_10am")[0].value
+            ]);
+timetableData.push([
+                "11:15 AM - 12:10 PM",
+                document.getElementsByName("monday_11am")[0].value,
+                document.getElementsByName("tuesday_11am")[0].value,
+                document.getElementsByName("wednesday_11am")[0].value,
+                document.getElementsByName("thursday_11am")[0].value,
+                document.getElementsByName("friday_11am")[0].value,
+                document.getElementsByName("saturday_11am")[0].value
+            ]);
+timetableData.push([
+                "12:50 PM - 01:45 PM",
+                document.getElementsByN12pme("monday_12pm")[0].value,
+                document.getElementsByN12pme("tuesday_12pm")[0].value,
+                document.getElementsByN12pme("wednesday_12pm")[0].value,
+                document.getElementsByN12pme("thursday_12pm")[0].value,
+                document.getElementsByN12pme("friday_12pm")[0].value,
+                document.getElementsByN12pme("saturday_12pm")[0].value
+            ]);
+timetableData.push([
+                "01:45 PM - 02:25 PM",
+                document.getElementsByName("monday_01pm")[0].value,
+                document.getElementsByName("tuesday_01pm")[0].value,
+                document.getElementsByName("wednesday_01pm")[0].value,
+                document.getElementsByName("thursday_01pm")[0].value,
+                document.getElementsByName("friday_01pm")[0].value,
+                document.getElementsByName("saturday_01pm")[0].value
+            ]);
+timetableData.push([
+                "02:35 PM - 03:25 PM",
+                document.getElementsByName("monday_02pm")[0].value,
+                document.getElementsByName("tuesday_02pm")[0].value,
+                document.getElementsByName("wednesday_02pm")[0].value,
+                document.getElementsByName("thursday_02pm")[0].value,
+                document.getElementsByName("friday_02pm")[0].value,
+                document.getElementsByName("saturday_02pm")[0].value
+            ]);
+timetableData.push([
+                "03:35 PM - 04:00 PM",
+                document.getElementsByName("monday_03pm")[0].value,
+                document.getElementsByName("tuesday_03pm")[0].value,
+                document.getElementsByName("wednesday_03pm")[0].value,
+                document.getElementsByName("thursday_03pm")[0].value,
+                document.getElementsByName("friday_03pm")[0].value,
+                document.getElementsByName("saturday_03pm")[0].value
+            ]);
+
+
+            // Update the names for other time slots as needed
+
+            // Create a worksheet
+            var ws = XLSX.utils.aoa_to_sheet(timetableData);
+
+            // Create a workbook
+            var wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Timetable");
+
+            // Save the workbook to a file
+            XLSX.writeFile(wb, 'timetable.xlsx');
+        }
+    </script>
+<script>
+        // Your existing JavaScript functions
+
+        function savePageAsImage() {
+            // Capture the entire HTML content
+            html2canvas(document.body).then(function (canvas) {
+                // Convert the canvas to a data URL
+                var dataURL = canvas.toDataURL("image/jpeg");
+
+                // Create a link element and trigger a download
+                var a = document.createElement('a');
+                a.href = dataURL;
+                a.download = 'timetable_page.jpeg';
+                a.click();
+            });
+        }
+    </script>
+
+</body>
+</html>
